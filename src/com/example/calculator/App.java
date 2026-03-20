@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -42,6 +43,7 @@ public class App {
             try {
                 int result = cal.calculate(num1, num2, op);
                 System.out.println("계산 결과는 " + result + " 입니다.");
+                System.out.println("연산 결과 :" + cal.getMem());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Calculator {
 
-    List<Integer> list = new ArrayList<>();
+    private List<Integer> mem = new ArrayList<>();
 
     public int calculate (int num1, int num2, char op){
 
@@ -31,7 +31,15 @@ public class Calculator {
                 throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
         }
 
-        list.add(result);
+        mem.add(result);
         return result; // 결과 반환 후 종료
+    }
+
+    public List<Integer> getMem() {
+        return mem;
+    }
+
+    public void setMem(List<Integer> list) {
+        this.mem = list;
     }
 }
