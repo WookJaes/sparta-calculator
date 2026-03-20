@@ -35,6 +35,14 @@ public class Calculator {
         return result; // 결과 반환 후 종료
     }
 
+    public void removeResult() {
+        if(mem.isEmpty()){
+            System.out.println("삭제할 결과가 없습니다.");
+        } else {
+            mem.remove(0);
+        }
+    }
+
     public List<Integer> getMem() {
         return mem;
     }

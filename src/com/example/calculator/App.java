@@ -47,11 +47,18 @@ public class App {
                 System.out.println("연산 결과 :" + cal.getMem()); // 연산 결과 조회 (getter)
 
                 // 외부 리스트를 사용하기 때문에 캡슐화 목적을 위반할 수 있다. (setter)
-                cal.setMem(new ArrayList<>(List.of(1, 2, 3)));
-                System.out.println("변경 결과 :" + cal.getMem()); // getter
+                // cal.setMem(new ArrayList<>(List.of(1, 2, 3)));
+                // System.out.println("변경 결과 :" + cal.getMem()); // getter
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+
+            System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (Y or N)");
+            String s = sc.next();
+            if(s.equals("Y")) {
+                cal.removeResult();
+            }
+            System.out.println("연산 결과 :" + cal.getMem());
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();
