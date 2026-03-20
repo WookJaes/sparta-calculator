@@ -39,7 +39,7 @@ public class Calculator {
         return mem;
     }
 
-    public void setMem(List<Integer> list) {
-        this.mem = list;
+    public void setMem(List<Integer> mem) {
+        this.mem = mem;
     }
 }

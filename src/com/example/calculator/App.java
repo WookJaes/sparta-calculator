@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -43,7 +44,11 @@ public class App {
             try {
                 int result = cal.calculate(num1, num2, op);
                 System.out.println("계산 결과는 " + result + " 입니다.");
-                System.out.println("연산 결과 :" + cal.getMem());
+                System.out.println("연산 결과 :" + cal.getMem()); // 연산 결과 조회 (getter)
+
+                // 외부 리스트를 사용하기 때문에 캡슐화 목적을 위반할 수 있다. (setter)
+                cal.setMem(new ArrayList<>(List.of(1, 2, 3)));
+                System.out.println("변경 결과 :" + cal.getMem()); // getter
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
