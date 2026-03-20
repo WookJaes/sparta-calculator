@@ -6,46 +6,44 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Calculator cal = new Calculator();
 
         while(true) {
 
-            System.out.print("첫 번째 숫자를 입력하세요: ");
-            int num1 = sc.nextInt();
+            int num1;
+            int num2;
 
-            System.out.print("두 번째 숫자를 입력하세요: ");
-            int num2 = sc.nextInt();
+            try {   // 0 이상의 정수만 입력받도록 예외 처리
+                System.out.print("첫 번째 숫자를 입력하세요: ");
+                num1 = sc.nextInt();
+
+                if (num1 < 0){
+                    System.out.println("양의 정수(0 포함)를 입력해주세요!");
+                    continue;
+                }
+
+                System.out.print("두 번째 숫자를 입력하세요: ");
+                num2 = sc.nextInt();
+
+                if (num2 < 0){
+                    System.out.println("양의 정수(0 포함)를 입력해주세요!");
+                    continue;
+                }
+
+            } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
+                System.out.println("숫자를 입력해주세요!");
+                sc.nextLine(); // nextInt()로 읽어온 문자 제거
+                continue;   // while 복귀
+            }
 
             System.out.print("사칙연산 기호를 입력하세요: ");
             char op = sc.next().charAt(0);  // 입력된 문자열 중 첫 번째 글자(문자 1개)
 
-            int result = 0;
-            boolean flag = true;
-
-            switch (op) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-                case '-':
-                    result = num1 - num2;
-                    break;
-                case '*':
-                    result = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 == 0) {
-                        System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                        flag = false;   // 잘못된 연산의 경우 결과값이 나오면 안된다.
-                    } else {
-                        result = num1 / num2;
-                    }
-                    break;
-                default:
-                    System.out.println("올바른 연산 기호를 입력하세요. (+, -, *, /)");
-                    flag = false;   // 잘못된 연산의 경우 결과값이 나오면 안된다.
-            }
-
-            if (flag) {
+            try {
+                int result = cal.calculate(num1, num2, op);
                 System.out.println("계산 결과는 " + result + " 입니다.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
