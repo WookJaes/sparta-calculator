@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -30,11 +29,10 @@ public class App {
                     System.out.println("양의 정수(0 포함)를 입력해주세요!");
                     continue;
                 }
-
             } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
                 System.out.println("숫자를 입력해주세요!");
                 sc.nextLine(); // nextInt()로 읽어온 문자 제거
-                continue;   // while 복귀
+                continue;
             }
 
             System.out.print("사칙연산 기호를 입력하세요: ");
@@ -46,14 +44,15 @@ public class App {
                 System.out.println("연산 결과 :" + cal.getMem()); // 연산 결과 조회 (getter)
             } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+                continue;
             }
 
-            System.out.println("첫 번째 계산 기록을 삭제 하시겠습니까? (Y or N)");
+            System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
             String s = sc.next();
-            if(s.equals("Y")) {
+            if(s.equalsIgnoreCase("Y")) {
                 cal.removeResult();
             }
-            System.out.println("연산 결과 :" + cal.getMem());
+            System.out.println("저장된 값 :" + cal.getMem());
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();

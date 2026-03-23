@@ -25,10 +25,4 @@ public class ArithmeticCalculator {
     public List<Integer> getMem() { // 캡슐화를 위해 불변 리스트로 반환
         return Collections.unmodifiableList(mem);
     }
-
-    // setter 제거
-//    public void setMem(List<Integer> mem) {
-//        this.mem = mem;
-//    }
-
 }

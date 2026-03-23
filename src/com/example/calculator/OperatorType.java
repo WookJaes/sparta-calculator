@@ -43,12 +43,12 @@ public enum OperatorType {
     }
 
     public static OperatorType findByOp(char op){
-        switch (op){    // return 덕분에 break가 없어도 된다.
-            case '+':   return PLUS;
-            case '-':   return MINUS;
-            case '*':   return MULTIPLY;
-            case '/':   return DIVIDE;
-            default:    throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
-        }
+        return switch (op) {    // switch 표현식으로 변경
+            case '+' -> PLUS;
+            case '-' -> MINUS;
+            case '*' -> MULTIPLY;
+            case '/' -> DIVIDE;
+            default -> throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
+        };
     }
 }
