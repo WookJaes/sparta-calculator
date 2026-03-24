@@ -36,7 +36,13 @@ public class App {
             }
 
             System.out.print("사칙연산 기호를 입력하세요: ");
-            char op = sc.next().charAt(0);  // 입력된 문자열 중 첫 번째 글자(문자 1개)
+            String input = sc.next();
+
+            if (input.length() != 1) {
+                System.out.println("연산 기호는 한 글자만 입력해주세요!");
+                continue;
+            }
+            char op = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
 
             try {
                 Number result = cal.calculate(num1, num2, op);
