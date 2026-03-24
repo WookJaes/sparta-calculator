@@ -18,7 +18,7 @@ public class App {
                 num1 = parseNumber(sc.next());
 
                 if (num1.doubleValue() < 0) { // int 타입은 소수점이 사라지기 때문에 double 타입 사용
-                    System.out.println("양의 정수(0 포함)를 입력해주세요!");
+                    System.out.println("0 이상의 숫자를 입력해주세요!");
                     continue;
                 }
 
@@ -26,7 +26,7 @@ public class App {
                 num2 = parseNumber(sc.next());
 
                 if (num2.doubleValue() < 0) {
-                    System.out.println("양의 정수(0 포함)를 입력해주세요!");
+                    System.out.println("0 이상의 숫자를 입력해주세요!");
                     continue;
                 }
             } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
