@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class ArithmeticCalculator {
-    private List<Integer> mem = new ArrayList<>();
+    private final List<Integer> mem = new ArrayList<>();
 
-    public int calculate (int num1, int num2, char op) {
+    public int calculate(int num1, int num2, char op) {
         OperatorType operator = OperatorType.findByOp(op);
-        int result = operator.calculate(num1, num2);
+        int result = operator.operate(num1, num2);
         mem.add(result);
         return result; // 결과 반환 후 종료
     }

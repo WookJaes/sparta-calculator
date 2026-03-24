@@ -3,25 +3,25 @@ package com.example.calculator;
 public enum OperatorType {
     PLUS('+'){
         @Override
-        public int calculate(int num1, int num2) {
+        public int operate(int num1, int num2) {
             return num1 + num2;
         }
     },
     MINUS('-'){
         @Override
-        public int calculate(int num1, int num2) {
+        public int operate(int num1, int num2) {
             return num1 - num2;
         }
     },
     MULTIPLY('*'){
         @Override
-        public int calculate(int num1, int num2) {
+        public int operate(int num1, int num2) {
             return num1 * num2;
         }
     },
     DIVIDE('/'){
         @Override
-        public int calculate(int num1, int num2) {
+        public int operate(int num1, int num2) {
             if (num2 == 0){
                 throw new ArithmeticException("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
             }
@@ -31,7 +31,7 @@ public enum OperatorType {
 
     private final char op;
 
-    public abstract int calculate(int num1, int num2);
+    public abstract int operate(int num1, int num2);
 
     // enum 클래스는 자체적으로 객체를 만들어서 사용함
     OperatorType(char op) {
