@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -40,10 +41,28 @@ public class App {
             try {
                 Number result = cal.calculate(num1, num2, op);
                 System.out.println("계산 결과는 " + result + " 입니다.");
-                System.out.println("저장된 값 :" + cal.getMem()); // 연산 결과 조회 (getter)
+                System.out.println("저장된 값:" + cal.getMem()); // 연산 결과 조회 (getter)
             } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
+            }
+
+            while (true) {
+                System.out.print("기준값을 입력해주세요: ");
+
+                try {
+                    Number num = parseNumber(sc.next());
+                    List<Number> result = cal.findResult(num);
+
+                    if (result.isEmpty())  {
+                        System.out.println("기준값보다 큰 결과값이 없습니다!");
+                    } else {
+                        System.out.println("기준값보다 큰 결과값은 " + result + " 입니다.");
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("숫자(정수 또는 실수)를 입력하세요!");
+                }
             }
 
             System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
@@ -51,7 +70,7 @@ public class App {
             if (s.equalsIgnoreCase("Y")) {
                 cal.removeResult();
             }
-            System.out.println("저장된 값 :" + cal.getMem());
+            System.out.println("저장된 값:" + cal.getMem());
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();
