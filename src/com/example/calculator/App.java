@@ -8,30 +8,29 @@ public class App {
         Scanner sc = new Scanner(System.in);
         ArithmeticCalculator cal = new ArithmeticCalculator();
 
-        while(true) {
+        while (true) {
 
-            int num1;
-            int num2;
+            Number num1;
+            Number num2;
 
-            try {   // 0 이상의 정수만 입력받도록 예외 처리
+            try {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
-                num1 = sc.nextInt();
+                num1 = parseNumber(sc.next());
 
-                if (num1 < 0){
+                if (num1.doubleValue() < 0) { // int 타입은 소수점이 사라지기 때문에 double 타입 사용
                     System.out.println("양의 정수(0 포함)를 입력해주세요!");
                     continue;
                 }
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
-                num2 = sc.nextInt();
+                num2 = parseNumber(sc.next());
 
-                if (num2 < 0){
+                if (num2.doubleValue() < 0) {
                     System.out.println("양의 정수(0 포함)를 입력해주세요!");
                     continue;
                 }
             } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
                 System.out.println("숫자를 입력해주세요!");
-                sc.nextLine(); // nextInt()로 읽어온 문자 제거
                 continue;
             }
 
@@ -39,9 +38,9 @@ public class App {
             char op = sc.next().charAt(0);  // 입력된 문자열 중 첫 번째 글자(문자 1개)
 
             try {
-                int result = cal.calculate(num1, num2, op);
+                Number result = cal.calculate(num1, num2, op);
                 System.out.println("계산 결과는 " + result + " 입니다.");
-                System.out.println("연산 결과 :" + cal.getMem()); // 연산 결과 조회 (getter)
+                System.out.println("저장된 값 :" + cal.getMem()); // 연산 결과 조회 (getter)
             } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -49,7 +48,7 @@ public class App {
 
             System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
             String s = sc.next();
-            if(s.equalsIgnoreCase("Y")) {
+            if (s.equalsIgnoreCase("Y")) {
                 cal.removeResult();
             }
             System.out.println("저장된 값 :" + cal.getMem());
@@ -64,5 +63,12 @@ public class App {
 
         sc.close();
 
+    }
+
+    private static Number parseNumber(String input) {   // 입력값 파싱
+        if (input.contains(("."))) {
+            return Double.parseDouble(input);   // double형 변환
+        }
+        return Integer.parseInt(input); // int형 변환
     }
 }

@@ -5,11 +5,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class ArithmeticCalculator {
-    private final List<Integer> mem = new ArrayList<>();
+    private final List<Number> mem = new ArrayList<>(); // Integer, Double 타입 결과 저장 가능
 
-    public int calculate(int num1, int num2, char op) {
+    // 서로 다른 타입의 입력값을 처리하기 위해 제네릭 메서드 사용
+    public <T extends Number, R extends Number> Number calculate(T num1, R num2, char op) {
         OperatorType operator = OperatorType.findByOp(op);
-        int result = operator.operate(num1, num2);
+
+        Number result;
+
+        if (num1 instanceof Integer && num2 instanceof Integer) {   // 입력값이 모두 정수인 경우 int 사용
+            result = operator.operate(num1.intValue(), num2.intValue());
+        } else {    // 실수가 입력되면 double 사용
+            result = operator.operate(num1.doubleValue(), num2.doubleValue());
+        }
+
         mem.add(result);
         return result; // 결과 반환 후 종료
     }
@@ -22,7 +31,7 @@ public class ArithmeticCalculator {
         }
     }
 
-    public List<Integer> getMem() { // 캡슐화를 위해 불변 리스트로 반환
+    public List<Number> getMem() { // 캡슐화를 위해 불변 리스트로 반환
         return Collections.unmodifiableList(mem);
     }
 }
