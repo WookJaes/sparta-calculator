@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator3;
 
 public enum OperatorType {  // 메서드 오버로딩 (int, double 타입 연산)
     PLUS('+'){
