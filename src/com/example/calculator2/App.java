@@ -68,7 +68,7 @@ public class App {
                         flag = false;
                     }
 
-                    if (flag && (index < 0 | index >= cal.getMem().size())) {   // 범위를 초과하면 변경 과정 종료
+                    if (flag && (index < 0 || index >= cal.getMem().size())) {   // 범위를 초과하면 변경 과정 종료
                         System.out.println("범위를 초과했습니다!");
                         flag = false;
                     }
