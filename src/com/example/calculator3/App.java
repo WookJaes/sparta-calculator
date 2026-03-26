@@ -60,7 +60,7 @@ public class App {
                     Number num = parseNumber(sc.next());
                     List<Number> result = cal.findResult(num);
 
-                    if (result.isEmpty())  {
+                    if (result.isEmpty()) {
                         System.out.println("기준값보다 큰 결과값이 없습니다!");
                     } else {
                         System.out.println("기준값보다 큰 결과값은 " + result + " 입니다.");

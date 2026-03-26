@@ -8,7 +8,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Calculator cal = new Calculator();
 
-        while(true) {
+        while (true) {
 
             int num1;
             int num2;
@@ -17,7 +17,7 @@ public class App {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
                 num1 = sc.nextInt();
 
-                if (num1 < 0){
+                if (num1 < 0) {
                     System.out.println("0 이상의 정수를 입력해주세요!");
                     continue;
                 }
@@ -25,7 +25,7 @@ public class App {
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 num2 = sc.nextInt();
 
-                if (num2 < 0){
+                if (num2 < 0) {
                     System.out.println("0 이상의 정수를 입력해주세요!");
                     continue;
                 }
@@ -58,7 +58,7 @@ public class App {
                     boolean flag = true;    // flag를 사용하여 로직 처리 (입력 값이 잘못되면 기록 삭제 부분으로 이동하도록 설계)
                     int index = 0;
                     int value = 0;
-                    
+
                     try {
                         System.out.print("인덱스(0부터 시작)를 입력하세요: ");   // 정수를 입력하지 않으면 변경 과정 종료
                         index = sc.nextInt();
@@ -85,7 +85,7 @@ public class App {
                     }
 
                     if (flag) {
-                        cal.setMem(index,value);
+                        cal.setMem(index, value);
                         System.out.println("변경된 값:" + cal.getMem());
                     }
                 }
@@ -96,7 +96,7 @@ public class App {
 
             System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
             String s = sc.next();
-            if(s.equalsIgnoreCase("Y")) {
+            if (s.equalsIgnoreCase("Y")) {
                 cal.removeResult();
             }
             System.out.println("저장된 값:" + cal.getMem());

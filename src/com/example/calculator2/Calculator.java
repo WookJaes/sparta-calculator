@@ -8,7 +8,7 @@ public class Calculator {
 
     private List<Integer> mem = new ArrayList<>();
 
-    public int calculate (int num1, int num2, char op){
+    public int calculate(int num1, int num2, char op) {
 
         int result;
 
@@ -37,7 +37,7 @@ public class Calculator {
     }
 
     public void removeResult() {
-        if(mem.isEmpty()){
+        if (mem.isEmpty()) {
             System.out.println("삭제할 결과가 없습니다.");
         } else {
             mem.remove(0);
