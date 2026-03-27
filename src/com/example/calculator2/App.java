@@ -1,5 +1,6 @@
 package com.example.calculator2;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -30,7 +31,7 @@ public class App {
                     continue;
                 }
 
-            } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
+            } catch (InputMismatchException e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
                 System.out.println("숫자를 입력해주세요!");
                 sc.nextLine(); // nextInt()로 읽어온 문자 제거
                 continue;   // while 복귀
@@ -43,52 +44,15 @@ public class App {
                 System.out.println("연산 기호는 한 글자만 입력해주세요!");
                 continue;
             }
-            char op = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
+            char operator = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
 
             try {
-                int result = cal.calculate(num1, num2, op);
+                int result = cal.calculate(num1, num2, operator);
                 System.out.println("계산 결과는 " + result + " 입니다.");
-                System.out.println("연산 결과:" + cal.getMem()); // 연산 결과 조회 (getter)
+                System.out.println("연산 결과:" + cal.getMemory()); // 연산 결과 조회 (getter)
 
-                // 메서드 값 변경 (setter)
-                System.out.print("저장된 결과를 변경하시겠습니까? (Y/y 입력 시 변경): ");
-                String str = sc.next();
+                updateResult(sc, cal);
 
-                if (str.equalsIgnoreCase("Y")) {
-                    boolean flag = true;    // flag를 사용하여 로직 처리 (입력 값이 잘못되면 기록 삭제 부분으로 이동하도록 설계)
-                    int index = 0;
-                    int value = 0;
-
-                    try {
-                        System.out.print("인덱스(0부터 시작)를 입력하세요: ");   // 정수를 입력하지 않으면 변경 과정 종료
-                        index = sc.nextInt();
-                    } catch (Exception e) {
-                        System.out.println("정수만 입력해야 합니다!");
-                        sc.nextLine();
-                        flag = false;
-                    }
-
-                    if (flag && (index < 0 || index >= cal.getMem().size())) {   // 범위를 초과하면 변경 과정 종료
-                        System.out.println("범위를 초과했습니다!");
-                        flag = false;
-                    }
-
-                    if (flag) {
-                        try {
-                            System.out.print("변경할 값을 입력하세요: ");     // 정수를 입력하지 않으면 변경 과정 종료
-                            value = sc.nextInt();
-                        } catch (Exception e) {
-                            System.out.println("정수만 입력해야 합니다!");
-                            sc.nextLine();
-                            flag = false;
-                        }
-                    }
-
-                    if (flag) {
-                        cal.setMem(index, value);
-                        System.out.println("변경된 값:" + cal.getMem());
-                    }
-                }
             } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -96,14 +60,14 @@ public class App {
 
             System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
             String s = sc.next();
-            if (s.equalsIgnoreCase("Y")) {
+            if ("Y".equalsIgnoreCase(s)) {  // NPE 방지를 위해 상수.equalsIgnoreCase(변수) 형태 사용
                 cal.removeResult();
             }
-            System.out.println("저장된 값:" + cal.getMem());
+            System.out.println("저장된 값:" + cal.getMemory());
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();
-            if (str.equals("exit")) {
+            if ("exit".equals(str)) {   // NPE 방지를 위해 상수.equals(변수) 형태 사용
                 System.out.println("계산기를 종료합니다.");
                 break;
             }
@@ -111,5 +75,42 @@ public class App {
 
         sc.close();
 
+    }
+
+    private static void updateResult(Scanner sc, Calculator cal) {
+        System.out.print("저장된 결과를 변경하시겠습니까? (Y/y 입력 시 변경): ");
+        String str = sc.next();
+
+        if (!"Y".equalsIgnoreCase(str)) {   // NPE 방지를 위해 상수.equalsIgnoreCase(변수) 형태 사용
+            return;
+        }
+
+        int index;
+        try {
+            System.out.print("인덱스(0부터 시작)를 입력하세요: ");
+            index = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("정수만 입력해야 합니다!");
+            sc.nextLine();
+            return;
+        }
+
+        if (index < 0 || index >= cal.getMemory().size()) {
+            System.out.println("범위를 초과했습니다!");
+            return;
+        }
+
+        int value;
+        try {
+            System.out.print("변경할 값을 입력하세요: ");
+            value = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("정수만 입력해야 합니다!");
+            sc.nextLine();
+            return;
+        }
+
+        cal.setMemory(index, value);
+        System.out.println("변경된 값: " + cal.getMemory());
     }
 }

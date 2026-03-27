@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Calculator {
 
-    private List<Integer> mem = new ArrayList<>();
+    private final List<Integer> memory = new ArrayList<>();
 
-    public int calculate(int num1, int num2, char op) {
+    public int calculate(int num1, int num2, char operator) {
 
         int result;
 
-        switch (op) {
+        switch (operator) {
             case '+':
                 result = num1 + num2;
                 break;
@@ -32,25 +32,25 @@ public class Calculator {
                 throw new IllegalArgumentException("올바른 연산 기호를 입력하세요. (+, -, *, /)");
         }
 
-        mem.add(result);
+        memory.add(result);
         return result; // 결과 반환 후 종료
     }
 
     public void removeResult() {
-        if (mem.isEmpty()) {
+        if (memory.isEmpty()) {
             System.out.println("삭제할 결과가 없습니다.");
         } else {
-            mem.remove(0);
+            memory.remove(0);
         }
     }
 
-    public List<Integer> getMem() {
-        return Collections.unmodifiableList(mem);   // 불변 객체
+    public List<Integer> getMemory() {
+        return Collections.unmodifiableList(memory);   // 불변 객체
     }
 
     // 내부 데이터가 변경되어 캡슐화의 의미가 약해진다.
     // 특정 위치의 값만 변경
-    public void setMem(int index, int value) {
-        mem.set(index, value);
+    public void setMemory(int index, int value) {
+        memory.set(index, value);
     }
 }

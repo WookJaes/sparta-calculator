@@ -1,5 +1,6 @@
 package com.example.calculator1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -28,7 +29,7 @@ public class App {
                     System.out.println("0 이상의 정수를 입력해주세요!");
                     continue;
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("숫자(정수)를 입력해주세요!");
                 sc.nextLine(); // nextInt()로 읽어온 문자 제거
                 continue;   // while 복귀
@@ -41,12 +42,11 @@ public class App {
                 System.out.println("연산 기호는 한 글자만 입력해주세요!");
                 continue;
             }
-            char op = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
+            char operator = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
 
             int result = 0;
-            boolean flag = true;
 
-            switch (op) {
+            switch (operator) {
                 case '+':
                     result = num1 + num2;
                     break;
@@ -59,23 +59,19 @@ public class App {
                 case '/':
                     if (num2 == 0) {
                         System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                        flag = false;   // 잘못된 연산의 경우 결과값이 나오면 안된다.
-                    } else {
-                        result = num1 / num2;
+                        continue;
                     }
+                    result = num1 / num2;
                     break;
                 default:
                     System.out.println("올바른 연산 기호를 입력하세요. (+, -, *, /)");
-                    flag = false;   // 잘못된 연산의 경우 결과값이 나오면 안된다.
+                    continue;
             }
-
-            if (flag) {
-                System.out.println("계산 결과는 " + result + " 입니다.");
-            }
+            System.out.println("계산 결과는 " + result + " 입니다.");
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();
-            if (str.equals("exit")) {
+            if ("exit".equals(str)) {   // NPE 방지를 위해 상수.equals(변수) 형태 사용
                 System.out.println("계산기를 종료합니다.");
                 break;
             }

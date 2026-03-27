@@ -1,5 +1,6 @@
 package com.example.calculator3;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class App {
                     System.out.println("0 이상의 숫자를 입력해주세요!");
                     continue;
                 }
-            } catch (Exception e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
+            } catch (InputMismatchException e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
                 System.out.println("숫자를 입력해주세요!");
                 continue;
             }
@@ -42,12 +43,12 @@ public class App {
                 System.out.println("연산 기호는 한 글자만 입력해주세요!");
                 continue;
             }
-            char op = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
+            char operator = input.charAt(0);  // 입력된 문자열 중 첫 번째 글자 (문자 1개)
 
             try {
-                Number result = cal.calculate(num1, num2, op);
+                Number result = cal.calculate(num1, num2, operator);
                 System.out.println("계산 결과는 " + result + " 입니다.");
-                System.out.println("저장된 값:" + cal.getMem()); // 연산 결과 조회 (getter)
+                System.out.println("저장된 값:" + cal.getMemory()); // 연산 결과 조회 (getter)
             } catch (ArithmeticException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
@@ -73,14 +74,14 @@ public class App {
 
             System.out.print("첫 번째 계산 기록을 삭제 하시겠습니까? (Y/y 입력 시 삭제): ");
             String s = sc.next();
-            if (s.equalsIgnoreCase("Y")) {
+            if ("Y".equalsIgnoreCase(s)) {   // NPE 방지를 위해 상수.equalsIgnoreCase(변수) 형태 사용
                 cal.removeResult();
             }
-            System.out.println("저장된 값:" + cal.getMem());
+            System.out.println("저장된 값:" + cal.getMemory());
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String str = sc.next();
-            if (str.equals("exit")) {
+            if ("exit".equals(str)) {   // NPE 방지를 위해 상수.equals(변수) 형태 사용
                 System.out.println("계산기를 종료합니다.");
                 break;
             }

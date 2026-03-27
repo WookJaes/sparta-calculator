@@ -52,23 +52,19 @@ public enum OperatorType {  // 메서드 오버로딩 (int, double 타입 연산
         }
     };
 
-    private final char op;
+    private final char operator;
 
     public abstract int operate(int num1, int num2);
 
     public abstract double operate(double num1, double num2);
 
     // enum 클래스는 자체적으로 객체를 만들어서 사용함
-    OperatorType(char op) {
-        this.op = op;
+    OperatorType(char operator) {
+        this.operator = operator;
     }
 
-    public char getOp() {
-        return op;
-    }
-
-    public static OperatorType findByOp(char op) {
-        return switch (op) {    // switch 표현식으로 변경
+    public static OperatorType findByOperator(char operator) {
+        return switch (operator) {    // switch 표현식으로 변경
             case '+' -> PLUS;
             case '-' -> MINUS;
             case '*' -> MULTIPLY;
