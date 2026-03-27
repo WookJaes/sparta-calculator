@@ -1,6 +1,5 @@
 package com.example.calculator3;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class App {
                     System.out.println("0 이상의 숫자를 입력해주세요!");
                     continue;
                 }
-            } catch (InputMismatchException e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
+            } catch (NumberFormatException e) {   // 예외 처리 (숫자를 입력하지 않는 경우)
                 System.out.println("숫자를 입력해주세요!");
                 continue;
             }
