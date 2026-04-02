@@ -1,8 +1,6 @@
 # sparta-calculator
-JAVA 계산기 과제
-<br/><br/>
 ## 프로젝트 소개
-자바 학습을 통해 배운 내용을 적용한 계산기입니다.
+자바 학습을 통해 배운 내용을 적용한 사칙연산 계산기입니다.
 <br/><br/>
 ## 주요 기능
 - 정수 사칙연산(+, -, *, /)
@@ -17,7 +15,7 @@ JAVA 계산기 과제
 
 ## 파일 구조
 ```text
-example
+/src/com/example
 ├─calculator1
 │      App.java
 │
